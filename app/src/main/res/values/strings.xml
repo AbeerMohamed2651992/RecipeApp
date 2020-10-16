@@ -10,5 +10,7 @@
     <string name="txt_headline"><b>Headline</b></string>
     <string name="txt_proteins"><b>Proteins</b></string>
     <string name="txt_time"><b>Time</b></string>
+    <string name="txt_sortbycalories">Sort by Calories</string>
+    <string name="txt_sortbyfat">Sort by Fat</string>
     <string name="msg_nointernetconnection">Sorry!! No Internet Connection</string>
 </resources>

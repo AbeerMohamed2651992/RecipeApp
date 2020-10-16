@@ -6,6 +6,29 @@
     android:orientation="vertical"
     >
 
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radiosortcalories"
+            android:text="@string/txt_sortbycalories" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radiosortfat"
+            android:text="@string/txt_sortbyfat" />
+        </RadioGroup>
+    </RelativeLayout>
+
     <SearchView
         android:id="@+id/recipename_search"
         android:layout_width="match_parent"

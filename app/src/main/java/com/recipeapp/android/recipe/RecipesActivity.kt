@@ -17,6 +17,10 @@ import kotlinx.android.synthetic.main.activity_recipes_list.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
+import android.R.attr.name
+
+
 
 
 /**
@@ -27,6 +31,11 @@ class RecipesActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
+
+    private lateinit var radioGroup: RadioGroup
+    private lateinit var selectedRadioButton: RadioButton
+
+    private lateinit var recipes : List<RecipesItem>;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +55,7 @@ class RecipesActivity : AppCompatActivity() {
 
                         recyclerView = findViewById<RecyclerView>(R.id.recyclerView).apply {
                             viewAdapter = RecipesAdapter(response.body()!!)
+                            recipes=response.body()!!
 
                             // use this setting to improve performance if you know that changes
                             // in content do not change the layout size of the RecyclerView
@@ -84,6 +94,41 @@ class RecipesActivity : AppCompatActivity() {
             }
 
         })
+
+
+        //sort by calories or by fat
+        radioGroup = findViewById(R.id.radioGroup)
+        radioGroup.setOnCheckedChangeListener { group, checkedId ->
+            val radio: RadioButton = findViewById(checkedId)
+            when (radio) {
+                radiosortcalories -> {
+                    Collections.sort(recipes, object : Comparator<RecipesItem> {
+                        override fun compare(lhs: RecipesItem, rhs: RecipesItem): Int {
+                           if(!lhs.calories.isEmpty() && !rhs.calories.isEmpty())
+                                return (lhs.calories.split(" ")[0].toInt().compareTo(rhs.calories.split(" ")[0].toInt()))
+                            else return 0
+                        }
+
+                    })
+                    recyclerView.adapter!!.notifyDataSetChanged()
+                }
+                radiosortfat -> {
+                    Collections.sort(recipes, object : Comparator<RecipesItem> {
+                        override fun compare(lhs: RecipesItem, rhs: RecipesItem): Int {
+                            if(!lhs.fats.isEmpty() && !rhs.fats.isEmpty())
+                                return (lhs.fats.split(" ")[0].toInt().compareTo(rhs.fats.split(" ")[0].toInt()))
+                            else return 0
+                        }
+
+                    })
+                    recyclerView.adapter!!.notifyDataSetChanged()
+                }
+            }
+        }
+
+         fun sortByCalories(){
+
+        }
     }
 }
 

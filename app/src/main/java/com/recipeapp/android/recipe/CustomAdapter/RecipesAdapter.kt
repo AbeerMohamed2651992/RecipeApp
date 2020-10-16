@@ -119,6 +119,8 @@ class RecipesAdapter(val recipes: List<RecipesItem>): RecyclerView.Adapter<Recip
     }
 
 
+
+
 }
 
 class RecipesViewHolder(itemView : View): RecyclerView.ViewHolder(itemView){
